@@ -30,7 +30,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="moon_stars_night_midnight_sky_icon_194248.ico">
+    <Image Include="night-sky_38995.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
