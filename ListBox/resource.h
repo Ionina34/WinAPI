@@ -4,8 +4,6 @@
 //
 #define IDI_ICON1                       101
 #define IDD_DIALOG1                     104
-#define IDOK                            1002
-#define IDCANCEL                        1003
 #define IDC_LIST1                       1004
 
 // Next default values for new objects
