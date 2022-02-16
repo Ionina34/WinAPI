@@ -97,6 +97,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		InitCommonControls();
 		//CreateToolTipFprRect(hwnd);
 		g_hwndTrackingTT = CreateTrackingTooltip(hwnd);
+		return TRUE;
 	}
 	break;
 	case WM_MOUSELEAVE:
@@ -125,7 +126,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		newX = GET_X_LPARAM(lParam);
 		newY = GET_Y_LPARAM(lParam);
 
-		if (newX != oldX || newY != oldY)
+		if ((newX != oldX) ||( newY != oldY))
 		{
 			oldX = newX;
 			oldY = newY;
@@ -137,7 +138,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			POINT pt = { newX, newY };
 			ClientToScreen(hwnd, &pt);
-			SendMessage(g_hwndTrackingTT, TTM_TRACKPOSITION, 0, (LPARAM)MAKEWORD(pt.x, pt.y));
+			SendMessage(g_hwndTrackingTT, TTM_TRACKPOSITION, 0, (LPARAM)MAKELONG(pt.x+20, pt.y-20));
 		}
 		SendMessage(g_hwndTrackingTT, TTM_TRACKACTIVATE, (WPARAM)TRUE, (LPARAM)&g_toolItem);
 		return FALSE;
@@ -234,5 +235,6 @@ HWND CreateTrackingTooltip(HWND hwnd)
 	g_toolItem.lpszText = (LPSTR)"Tracking tooltip";
 	g_toolItem.uId = (UINT_PTR)hwnd;
 	GetClientRect(hwnd, &g_toolItem.rect);
-	SendMessage(g_hwndTrackingTT, TTM_ADDTOOL, 0, (LPARAM)(LPTOOLINFO)&g_toolItem);
+	SendMessage(hwndTT, TTM_ADDTOOL, 0, (LPARAM)(LPTOOLINFO)&g_toolItem);
+	return hwndTT;
 }
